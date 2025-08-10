@@ -1,0 +1,2 @@
+C:/Users/Douglas/Desktop/Dart/virtual_salao/android/app/.cxx/Debug/1p734l29/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Douglas/Desktop/Dart/virtual_salao/android/app/.cxx/Debug/1p734l29/arm64-v8a/CMakeFiles/rebuild_cache.dir

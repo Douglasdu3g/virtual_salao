@@ -1,0 +1,2 @@
+C:/Users/Douglas/Desktop/Flutter e Dart Projects/virtual_salao/android/app/.cxx/Debug/1446b2k3/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Douglas/Desktop/Flutter e Dart Projects/virtual_salao/android/app/.cxx/Debug/1446b2k3/x86_64/CMakeFiles/rebuild_cache.dir
