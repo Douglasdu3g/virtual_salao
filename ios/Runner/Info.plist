@@ -34,11 +34,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<false>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Este app precisa de acesso à sua localização para mostrar os barbeiros próximos a você.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string> Este app precisa de acesso à sua localização para abrir o mapa.</string>
+	<string>Este app precisa de acesso à sua localização para mostrar barbeiros próximos e abrir o mapa.</string>
+
+	<!-- Chave do Google Maps (carregada no AppDelegate) -->
+	<key>GoogleMapsApiKey</key>
+	<string>$(GOOGLE_MAPS_API_KEY)</string>
 	
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

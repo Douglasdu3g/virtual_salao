@@ -24,10 +24,10 @@ class BarbeiroDetalhesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              "Especialidades:",
+                "Serviços:",
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Text(barbeiro.especialidades.join(', ')),
+            Text(barbeiro.servicos.keys.join(', ')),
             const SizedBox(height: 16),
             Text(
               "Disponibilidade:",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../models/barber.dart';
@@ -17,7 +18,8 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nomeController = TextEditingController();
   final _contatoController = TextEditingController();
-  final _especialidadesController = TextEditingController();
+  final _servicosController = TextEditingController();
+  final _precosController = TextEditingController();
   final _latitudeController = TextEditingController();
   final _longitudeController = TextEditingController();
   final _avaliacaoController = TextEditingController(text: '5.0');
@@ -25,7 +27,7 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
   final _firebaseService = FirebaseService();
 
   File? _imagemPerfil;
-  List<String> especialidades = [];
+  Map<String, double> servicos = {};
   bool _disponivelAgora = true;
   bool _isLoading = false;
   bool _buscandoLocalizacao = false;
@@ -41,18 +43,29 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
     }
   }
 
-  void _adicionarEspecialidade() {
-    if (_especialidadesController.text.isNotEmpty) {
-      setState(() {
-        especialidades.add(_especialidadesController.text.trim());
-        _especialidadesController.clear();
-      });
+  void _adicionarServico() {
+    if (_servicosController.text.isNotEmpty &&
+        _precosController.text.isNotEmpty) {
+      final servico = _servicosController.text.trim();
+      final preco = double.tryParse(_precosController.text.trim());
+
+      if (preco != null) {
+        setState(() {
+          servicos[servico] = preco;
+          _servicosController.clear();
+          _precosController.clear();
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Por favor, insira um preço válido')),
+        );
+      }
     }
   }
 
-  void _removerEspecialidade(String especialidade) {
+  void _removerServico(String servico) {
     setState(() {
-      especialidades.remove(especialidade);
+      servicos.remove(servico);
     });
   }
 
@@ -88,7 +101,7 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
 
   Future<void> _salvarBarbeiro() async {
     if (_formKey.currentState!.validate()) {
-      if (especialidades.isEmpty) {
+      if (servicos.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text('Adicione pelo menos uma especialidade')),
@@ -104,7 +117,7 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
         final novoBarbeiro = Barbeiro(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           nome: _nomeController.text.trim(),
-          especialidades: especialidades,
+          servicos: servicos, // Agora passamos o Map diretamente
           avaliacao: double.parse(_avaliacaoController.text),
           localizacao: Localizacao(
             latitude: double.parse(_latitudeController.text),
@@ -257,43 +270,49 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    // Especialidades
+                    // Serviços e Preços
                     const Text(
-                      'Especialidades',
+                      'Serviços e Preços',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _especialidadesController,
-                            decoration: const InputDecoration(
-                              labelText: 'Ex: Corte, Barba, Sobrancelha',
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(Icons.content_cut),
-                            ),
-                            onFieldSubmitted: (_) => _adicionarEspecialidade(),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        ElevatedButton(
-                          onPressed: _adicionarEspecialidade,
-                          child: const Text('Adicionar'),
-                        ),
-                      ],
+                    TextFormField(
+                      controller: _servicosController,
+                      decoration: const InputDecoration(
+                        labelText: 'Serviço',
+                        hintText: 'Ex: Corte, Barba...',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.content_cut),
+                      ),
                     ),
                     const SizedBox(height: 8),
-                    if (especialidades.isNotEmpty)
+                    TextFormField(
+                      controller: _precosController,
+                      decoration: const InputDecoration(
+                        labelText: 'Preço',
+                        hintText: 'Ex: 50.00',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.attach_money),
+                      ),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                    ),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: _adicionarServico,
+                      child: const Text('Adicionar Serviço'),
+                    ),
+                    const SizedBox(height: 8),
+                    if (servicos.isNotEmpty)
                       Wrap(
                         spacing: 8,
-                        children: especialidades.map((especialidade) {
+                        children: servicos.entries.map((entry) {
                           return Chip(
-                            label: Text(especialidade),
+                            label: Text(
+                                '${entry.key} - R\$ ${entry.value.toStringAsFixed(2)}'),
                             deleteIcon: const Icon(Icons.close),
-                            onDeleted: () =>
-                                _removerEspecialidade(especialidade),
+                            onDeleted: () => _removerServico(entry.key),
                           );
                         }).toList(),
                       ),
@@ -430,10 +449,22 @@ class _CadastroBarbeiroScreenState extends State<CadastroBarbeiroScreen> {
   void dispose() {
     _nomeController.dispose();
     _contatoController.dispose();
-    _especialidadesController.dispose();
+    _servicosController.dispose();
+    _precosController.dispose();
     _latitudeController.dispose();
     _longitudeController.dispose();
     _avaliacaoController.dispose();
     super.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>(
+        '_servicosController', _servicosController));
+    properties.add(DiagnosticsProperty<TextEditingController>(
+        '_precosController', _precosController));
+    properties
+        .add(DiagnosticsProperty<Map<String, double>>('servicos', servicos));
   }
 }

@@ -20,7 +20,7 @@ class FirebaseService {
       }
 
       // Criar mapa de dados do barbeiro
-      final dadosBarbeiro = barbeiro.toJson();
+      final dadosBarbeiro = barbeiro.toFirestore();
 
       // Converter localização para GeoPoint
       dadosBarbeiro['localizacao'] = GeoPoint(
@@ -80,11 +80,25 @@ class FirebaseService {
         return Barbeiro(
           id: doc.id,
           nome: data['nome'] ?? '',
-          especialidades: List<String>.from(data['especialidades'] ?? []),
+          servicos: (data['servicos'] as Map<String, dynamic>?)?.map(
+                (key, value) => MapEntry(
+                    key,
+                    (value is num)
+                        ? value.toDouble()
+                        : double.tryParse(value.toString()) ?? 0.0),
+              ) ??
+              {},
           avaliacao: (data['avaliacao'] ?? 5.0).toDouble(),
           localizacao: localizacao,
           disponivelAgora: data['disponivelAgora'] ?? false,
-          contato: data['contato'] ?? '',
+          contato: () {
+            final dynamic c = data['contato'];
+            if (c is Map) {
+              final dynamic w = c['whatsapp'];
+              return w?.toString() ?? '';
+            }
+            return c?.toString() ?? '';
+          }(),
           fotoPerfil: data['fotoPerfil'] ?? '',
         );
       }).toList();
@@ -118,7 +132,14 @@ class FirebaseService {
         return Barbeiro(
           id: doc.id,
           nome: data['nome'] ?? '',
-          especialidades: List<String>.from(data['especialidades'] ?? []),
+          servicos: (data['servicos'] as Map<String, dynamic>?)?.map(
+                (key, value) => MapEntry(
+                    key,
+                    (value is num)
+                        ? value.toDouble()
+                        : double.tryParse(value.toString()) ?? 0.0),
+              ) ??
+              {},
           avaliacao: (data['avaliacao'] ?? 5.0).toDouble(),
           localizacao: localizacao,
           disponivelAgora: data['disponivelAgora'] ?? false,
@@ -135,7 +156,7 @@ class FirebaseService {
   // Atualizar um barbeiro
   Future<void> atualizarBarbeiro(Barbeiro barbeiro, {File? novaImagem}) async {
     try {
-      final dadosAtualizados = barbeiro.toJson();
+      final dadosAtualizados = barbeiro.toFirestore();
 
       // Converter localização para GeoPoint
       dadosAtualizados['localizacao'] = GeoPoint(

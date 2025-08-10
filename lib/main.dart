@@ -8,6 +8,7 @@ import 'package:virtual_salao/ui/screens/cadastro_barbeiro_screen.dart';
 import 'models/barber.dart';
 import 'ui/screens/barbeiro_detalhes_screen.dart';
 import 'models/services/auth_service.dart';
+import 'ui/screens/cadastro_usuario_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ class VirtualSalaoApp extends StatelessWidget {
         'home': (_) => const HomeScreen(),
         'mapa': (_) => const MapaScreen(),
         'cadastro_barbeiro': (_) => const CadastroBarbeiroScreen(),
+        'cadastro_usuario': (_) => const CadastroUsuarioScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == 'detalhes') {

@@ -3,7 +3,7 @@ import 'localizacao.dart';
 class Barbeiro {
   final String id;
   final String nome;
-  final List<String> especialidades;
+  final Map<String, double> servicos;
   final double avaliacao;
   final Localizacao localizacao;
   final bool disponivelAgora;
@@ -13,7 +13,7 @@ class Barbeiro {
   Barbeiro({
     required this.id,
     required this.nome,
-    required this.especialidades,
+    required this.servicos,
     required this.avaliacao,
     required this.localizacao,
     required this.disponivelAgora,
@@ -21,31 +21,37 @@ class Barbeiro {
     required this.fotoPerfil,
   });
 
-  factory Barbeiro.fromJson(Map<String, dynamic> json) {
+  factory Barbeiro.fromFirestore(Map<String, dynamic> data, String id) {
     return Barbeiro(
-      id: json['id'],
-      nome: json['nome'],
-      especialidades: List<String>.from(json['especialidades']),
-      avaliacao: (json['avaliacao'] as num).toDouble(),
+      id: id,
+      nome: data['nome'] ?? '',
+      servicos: (data['servicos'] as Map<String, dynamic>?)?.map(
+            (key, value) => MapEntry(
+                key,
+                (value is num)
+                    ? value.toDouble()
+                    : double.tryParse(value.toString()) ?? 0.0),
+          ) ??
+          {},
+      avaliacao: (data['avaliacao'] ?? 0.0).toDouble(),
       localizacao: Localizacao(
-        latitude: (json['localizacao']['latitude'] as num).toDouble(),
-        longitude: (json['localizacao']['longitude'] as num).toDouble(),
+        latitude: (data['localizacao']?['latitude'] ?? 0.0).toDouble(),
+        longitude: (data['localizacao']?['longitude'] ?? 0.0).toDouble(),
       ),
-      disponivelAgora: json['disponivelAgora'] as bool,
-      contato: json['contato']['whatsapp'] as String,
-      fotoPerfil: json['fotoPerfil'],
+      disponivelAgora: data['disponivelAgora'] ?? false,
+      contato: data['contato']?['whatsapp'] ?? '',
+      fotoPerfil: data['fotoPerfil'] ?? '',
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toFirestore() {
     return {
-      'id': id,
       'nome': nome,
-      'especialidades': especialidades,
+      'servicos': servicos,
       'avaliacao': avaliacao,
       'localizacao': localizacao.toJson(),
       'disponivelAgora': disponivelAgora,
-      'contato': contato,
+      'contato': {'whatsapp': contato},
       'fotoPerfil': fotoPerfil,
     };
   }

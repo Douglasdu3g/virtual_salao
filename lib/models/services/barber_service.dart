@@ -7,8 +7,6 @@ class BarberService {
   final String _gistUrl =
       'https://gist.githubusercontent.com/Douglasdu3g/4e85d89516a990b6ac25578c94b059db/raw/barbeiro.json';
 
-  static const String githubApiKey = "REMOVED";
-
   // URLs de imagens reais do Unsplash (todas testadas e válidas)
   static const List<String> _realImageUrls = [
     'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=200&h=200&fit=crop&crop=faces',
@@ -25,12 +23,8 @@ class BarberService {
 
   Future<List<Barbeiro>> getBarbeiros() async {
     try {
-      final headers = {
-        'Authorization': 'token $githubApiKey',
-        'Accept': 'application/vnd.github.v3+json',
-      };
-
-      final response = await http.get(Uri.parse(_gistUrl), headers: headers);
+      // Gists públicos não exigem autenticação; não use tokens no cliente
+      final response = await http.get(Uri.parse(_gistUrl));
 
       if (response.statusCode == 200) {
         final jsonMap = json.decode(response.body);
@@ -45,7 +39,10 @@ class BarberService {
             final barbeiroData = barbeirosList[i];
             // Substituir URL de exemplo por URL real
             barbeiroData['fotoPerfil'] = _getRealImageUrl(i);
-            barbeiros.add(Barbeiro.fromJson(barbeiroData));
+            final String id = (barbeiroData is Map<String, dynamic>)
+                ? (barbeiroData['id']?.toString() ?? i.toString())
+                : i.toString();
+            barbeiros.add(Barbeiro.fromFirestore(barbeiroData, id));
           }
 
           return barbeiros;

@@ -29,6 +29,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+# Ignore nested Android build directories
+/android/build/
+/android/app/build/
 
 # Symbolication related
 app.*.symbols

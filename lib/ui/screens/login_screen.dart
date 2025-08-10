@@ -183,7 +183,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     //Imagem dos icones.
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 4,
                       children: [
                         IconButton(
                           onPressed: () {},
@@ -193,11 +192,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 75,
                           ),
                         ),
+                        const SizedBox(width: 4),
                         IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.facebook,
                               size: 55, color: AppColors.facebookBlue),
                         ),
+                        const SizedBox(width: 4),
                         IconButton(
                           onPressed: () {},
                           icon: const Icon(Icons.apple,
@@ -254,7 +255,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           onPressed: () {
-                            // Navegar para tela de cadastro (implementar depois)
+                            Navigator.pushNamed(
+                              context,
+                              'cadastro_usuario',
+                            );
                           },
                           child: const Text(
                             'Cadastrar',

@@ -262,7 +262,7 @@ class _MapaScreenState extends State<MapaScreen> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
-            Text(barbeiro.especialidades.join(', ')),
+            Text(barbeiro.servicos.keys.join(', ')),
 
             const SizedBox(height: 16),
 

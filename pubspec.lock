@@ -250,10 +250,17 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
+<<<<<<< HEAD
       sha256: "6382ce712ff69b0f719640ce957559dde459e55ecd433c767e06d139ddf16cab"
       url: "https://pub.dev"
     source: hosted
     version: "2.0.29"
+=======
+      sha256: f948e346c12f8d5480d2825e03de228d0eb8c3a737e4cdaa122267b89c022b5e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.28"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -324,42 +331,77 @@ packages:
     dependency: "direct main"
     description:
       name: google_maps_flutter
+<<<<<<< HEAD
       sha256: e1805e5a5885bd14a1c407c59229f478af169bf4d04388586b19f53145a5db3a
       url: "https://pub.dev"
     source: hosted
     version: "2.12.3"
+=======
+      sha256: "830d8f7b51b4a950bf0d7daa675324fed6c9beb57a7ecca2a59018270c96b4e0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.12.1"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   google_maps_flutter_android:
     dependency: transitive
     description:
       name: google_maps_flutter_android
+<<<<<<< HEAD
       sha256: "18551dfdbd201d3a14118ff30698cd8af2168d9255ffbf96d71fbe5efe8157ed"
       url: "https://pub.dev"
     source: hosted
     version: "2.18.1"
+=======
+      sha256: ab83128296fbeaa52e8f2b3bf53bcd895e64778edddcdc07bc8f33f4ea78076c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.16.1"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   google_maps_flutter_ios:
     dependency: transitive
     description:
       name: google_maps_flutter_ios
+<<<<<<< HEAD
       sha256: ca02463b19a9abc7d31fcaf22631d021d647107467f741b917a69fa26659fd75
       url: "https://pub.dev"
     source: hosted
     version: "2.15.5"
+=======
+      sha256: c7433645c4c9b61c587938cb06072f3dad601239e596b090c0f8f206c1f2ade7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.15.2"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   google_maps_flutter_platform_interface:
     dependency: transitive
     description:
       name: google_maps_flutter_platform_interface
+<<<<<<< HEAD
       sha256: b6a49a699e6d01b5e567f84bff645260ec1d7f9db3fae01dd88267c8b12d91dd
       url: "https://pub.dev"
     source: hosted
     version: "2.13.0"
+=======
+      sha256: "970c8f766c02909c7be282dea923c971f83a88adaf07f8871d0aacebc3b07bb2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.11.1"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   google_maps_flutter_web:
     dependency: transitive
     description:
       name: google_maps_flutter_web
+<<<<<<< HEAD
       sha256: ce2cac714e5462bf761ff2fdfc3564c7e5d7ed0578268dccb0a54dbdb1e6214e
       url: "https://pub.dev"
     source: hosted
     version: "0.5.12+2"
+=======
+      sha256: a45786ea6691cc7cdbe2cf3ce2c2daf4f82a885745666b4a36baada3a4e12897
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.12"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   html:
     dependency: transitive
     description:
@@ -372,10 +414,17 @@ packages:
     dependency: "direct main"
     description:
       name: http
+<<<<<<< HEAD
       sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+=======
+      sha256: "2c11f3f94c687ee9bad77c171151672986360b2b001d109814ee7140b2cf261b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   http_parser:
     dependency: transitive
     description:
@@ -396,10 +445,17 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
+<<<<<<< HEAD
       sha256: b08e9a04d0f8d91f4a6e767a745b9871bfbc585410205c311d0492de20a7ccd6
       url: "https://pub.dev"
     source: hosted
     version: "0.8.12+25"
+=======
+      sha256: "317a5d961cec5b34e777b9252393f2afbd23084aa6e60fcf601dcf6341b9ebeb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.12+23"
+>>>>>>> 7cb33e4 (chore(security): remover chaves do código, ler Maps via secrets; corrigir Info.plist; fixes de UI e serviços)
   image_picker_for_web:
     dependency: transitive
     description:

@@ -177,13 +177,12 @@ class _AgendamentoScreenState extends State<AgendamentoScreen> {
             const SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: widget.barbeiro.especialidades.length,
+                itemCount: widget.barbeiro.servicos.length,
                 itemBuilder: (context, index) {
-                  final servico = widget.barbeiro.especialidades[index];
+                  final servico = widget.barbeiro.servicos.keys.toList()[index];
                   return RadioListTile<String>(
                     title: Text(servico),
-                    subtitle:
-                        Text('R\$ ${precos[servico]?.toStringAsFixed(2)}'),
+                    subtitle: Text('R\$ ${widget.barbeiro.servicos[servico]}'),
                     value: servico,
                     groupValue: servicoSelecionado,
                     onChanged: (value) =>

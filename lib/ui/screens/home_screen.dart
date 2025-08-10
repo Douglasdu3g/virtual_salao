@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         avaliacao: barbeiro.avaliacao,
                         precoCorte: 0, // ajustar se tiver valor
                         fotoPerfilUrl: barbeiro.fotoPerfil,
-                        especialidades: barbeiro.especialidades,
+                        especialidades: barbeiro.servicos.keys.toList(),
                         disponivelHoje: temDisponibilidadeHoje,
                         barbeiro: barbeiro,
                       );

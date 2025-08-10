@@ -8,7 +8,12 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GMSServices.provideAPIKey("REMOVED")
+    // Leia a chave do Info.plist (GoogleMapsApiKey). Não deixe hardcoded.
+    if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
+       let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
+       let apiKey = dict["GoogleMapsApiKey"] as? String, !apiKey.isEmpty {
+      GMSServices.provideAPIKey(apiKey)
+    }
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
