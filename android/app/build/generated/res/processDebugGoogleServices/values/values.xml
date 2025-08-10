@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="gcm_defaultSenderId" translatable="false">653696170009</string>
-    <string name="google_api_key" translatable="false">AIzaSyA_fXY3VZrRHbiORSNOLa8g8trNUO5jBks</string>
-    <string name="google_app_id" translatable="false">1:653696170009:android:7b9894badcf1a5ba52d288</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA_fXY3VZrRHbiORSNOLa8g8trNUO5jBks</string>
-    <string name="google_storage_bucket" translatable="false">virtual-salao-f8532.firebasestorage.app</string>
-    <string name="project_id" translatable="false">virtual-salao-f8532</string>
-</resources>

@@ -29,6 +29,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/android/build/
+/android/app/build/
+*.apk
 # Ignore nested Android build directories
 /android/build/
 /android/app/build/
@@ -83,3 +86,12 @@ test/.test_coverage.dart
 
 # Windows
 Thumbs.db
+
+# Ferramentas de limpeza de histórico
+bfg.jar
+replacements.txt
+
+# Diretórios efêmeros/gerados (Windows Flutter plugins)
+/windows/flutter/ephemeral/
+/windows/flutter/generated_plugin_registrant.*
+/windows/flutter/generated_plugins.cmake
