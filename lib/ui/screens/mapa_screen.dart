@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../models/barber.dart';
 import '../../models/localizacao.dart';
 import '../../models/services/location_service.dart';
-import '../../models/services/barber_service.dart';
+import '../../models/services/firebase_service.dart';
 import 'barbeiro_detalhes_screen.dart';
 import '../styles/colors.dart';
 
@@ -20,7 +20,7 @@ class _MapaScreenState extends State<MapaScreen> {
   List<Barbeiro> _barbeiros = [];
   Set<Marker> _markers = {};
   bool _isLoading = true;
-  final BarberService _barberService = BarberService();
+  final FirebaseService _firebaseService = FirebaseService();
 
   // Configurações iniciais do mapa (São Paulo como padrão)
   static const CameraPosition _initialPosition = CameraPosition(
@@ -87,7 +87,8 @@ class _MapaScreenState extends State<MapaScreen> {
 
   Future<void> _loadBarbeiros() async {
     try {
-      _barbeiros = await _barberService.getBarbeiros();
+      // Carrega a primeira emissão do Firestore
+      _barbeiros = await _firebaseService.getBarbeiros().first;
       debugPrint('Barbeiros carregados: ${_barbeiros.length}');
     } catch (e) {
       debugPrint('Erro ao carregar barbeiros: $e');
